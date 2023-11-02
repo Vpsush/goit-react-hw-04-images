@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import css from 'App.module.css';
 import Searchbar from './components/Searchbar/Searchbar';
 import ImageGallery from './components/ImageGallery/ImageGallery';
@@ -8,29 +8,15 @@ import Button from './components/Button/Button';
 import ErrorCard from './components/ErrorCard';
 import { fetchImages } from './services/fetchImages';
 
-class App extends Component {
-  state = {
-    images: [],
-    isLoading: false,
-    error: '',
-    showModal: false,
-    query: '',
-    page: 1,
-    hasMoreImages: true, // Initialize it as true
-  };
+export const App = () => {
 
-  // componentDidUpdate(_, prevState) {
-  //   if (this.state.query !== prevState.query) {
-  //     this.setState({ page: 1, images: [], isLoading: false });
-  //     if (this.state.page === 1) {
-  //       this.fetchImagesInternal(this.state.query, this.state.page);
-  //     }
-  //   }
-
-  //   if (this.state.page !== prevState.page) {
-  //     this.fetchImagesInternal(this.state.query, this.state.page);
-  //   }
-  // }
+  const [images, useImages]= useState([]);
+  const [isLoading, useIsLoading]= useState(false);
+  const [error, useError]= useState('');
+  const [showModal, useShowModal]= useState(false);
+  const [query, useQuery]= useState('');
+  const [page, usePage]= useState(1);
+  const [hasMoreImages, useHasMoreImages]= useState(true);
 
   componentDidUpdate(_, prevState) {
     if (
