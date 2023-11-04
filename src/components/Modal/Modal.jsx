@@ -1,38 +1,49 @@
-// import React, { useState } from 'react';
-// import css from './Modal.module.css';
+import React, { useEffect } from 'react';
+import css from './Modal.module.css';
 
-// const Modal = ({modalData, closeModal}) => {
-//   const [] = useState()
+const Modal = ({ modalData, closeModal, largeImageURL }) => {
+  //   const [cl] = useState()
 
-//   componentDidMount() {
-//     window.addEventListener('keydown', handleKeyDown);
-//   }
+  //   const componentDidMount() {
+  //     window.addEventListener('keydown', handleKeyDown);
+  //   }
 
-//   componentWillUnmount() {
-//     window.removeEventListener('keydown', this.handleKeyDown);
-//   }
+  //   componentWillUnmount() {
+  //     window.removeEventListener('keydown', this.handleKeyDown);
+  //   }
 
-//   handleKeyDown = event => {
-//     if (event.code === 'Escape') {
-//       this.props.closeModal();
-//     }
-//   };
+  useEffect(() => {
+    const handleKeyDown = event => {
+      if (event.code === 'Escape') {
+        closeModal();
+      }
+    };
 
-//   render() {
-//     return (
-//       <div className={css.Overlay} onClick={this.props.closeModal}>
-//         <div className={css.modal}>
-//           <button onClick={this.props.closeModal} className={css.closeBtn}>
-//             ❌
-//           </button>
-//           <h2>Product Details</h2>
-//           <img
-//             src={this.props.largeImageURL}
-//             alt="Large Product"
-//             className={css.image}
-//           />
-//         </div>
-//       </div>
-//     );
-//   }
-// }
+    window.addEventListener('keydown', handleKeyDown);
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'auto';
+    };
+  }, [closeModal]);
+
+  //   const handleKeyDown = event => {
+  //     if (event.code === 'Escape') {
+  //       closeModal();
+  //     }
+  //   };
+  return (
+    <div className={css.Overlay} onClick={closeModal}>
+      <div className={css.modal}>
+        <button onClick={closeModal} className={css.closeBtn}>
+          ❌
+        </button>
+        <h2>Product Details</h2>
+        <img src={largeImageURL} alt="Large Product" className={css.image} />
+      </div>
+    </div>
+  );
+};
+
+export default Modal;
